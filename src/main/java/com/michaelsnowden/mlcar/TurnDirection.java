@@ -3,7 +3,7 @@ package com.michaelsnowden.mlcar;
 /**
  * @author michael.snowden
  */
-public enum Turn {
+public enum TurnDirection {
     LEFT,
     RIGHT,
     NONE
