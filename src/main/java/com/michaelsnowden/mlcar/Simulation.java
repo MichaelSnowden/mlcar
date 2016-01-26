@@ -18,9 +18,6 @@ import java.util.List;
  * @author michael.snowden
  */
 public class Simulation implements ActionListener, Runnable {
-    private final OLSMultipleLinearRegression turningLeftRegression;
-    private final OLSMultipleLinearRegression turningRightRegression;
-    private final OLSMultipleLinearRegression notTurningRegression;
     private double[] left;
     private double[] right;
     private double[] none;
@@ -47,9 +44,9 @@ public class Simulation implements ActionListener, Runnable {
         frame.setSize(backgroundImage.getWidth(), backgroundImage.getHeight());
         carX = backgroundImage.getWidth() / 2.0;
         carY = backgroundImage.getHeight() / 6.0;
-        turningLeftRegression = new OLSMultipleLinearRegression();
-        turningRightRegression = new OLSMultipleLinearRegression();
-        notTurningRegression = new OLSMultipleLinearRegression();
+        OLSMultipleLinearRegression turningLeftRegression = new OLSMultipleLinearRegression();
+        OLSMultipleLinearRegression turningRightRegression = new OLSMultipleLinearRegression();
+        OLSMultipleLinearRegression notTurningRegression = new OLSMultipleLinearRegression();
         try {
             ResultSet query = statement.executeQuery("SELECT COUNT(*) AS count FROM readings");
             query.next();
@@ -101,11 +98,9 @@ public class Simulation implements ActionListener, Runnable {
 
                 g.setColor(Color.GREEN);
                 double thetas[] = {Math.PI / 2, Math.PI / 4, 0, -Math.PI / 4, -Math.PI / 2};
-                List<Double> distances = new ArrayList<>();
                 for (double theta : thetas) {
                     double angle = carAngle + theta;
                     double distance = getDistance(angle, centerX, centerY);
-                    distances.add(1 / distance);
                     g.drawLine(
                             (int) centerX,
                             (int) centerY,
@@ -159,7 +154,7 @@ public class Simulation implements ActionListener, Runnable {
         double centerY = carY + carImage.getHeight() / 2.0;
         for (double theta : thetas) {
             double angle = carAngle + theta;
-            double distance = getDistance(angle, centerX, centerY);
+            double distance = 1 / getDistance(angle, centerX, centerY);
             distances.add(distance);
         }
         double leftPred = 0.0;
@@ -186,8 +181,6 @@ public class Simulation implements ActionListener, Runnable {
     public void run() {
         Timer timer = new Timer(10, this);
         timer.start();
-        frame.setFocusable(true);
-        frame.requestFocus();
     }
 
     public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
