@@ -40,7 +40,7 @@ public class Simulation implements ActionListener, Runnable {
         frame.setVisible(true);
 
         carImage = ImageIO.read(getClass().getClassLoader().getResource("car.png"));
-        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack.png"));
+        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack2.png"));
         frame.setSize(backgroundImage.getWidth(), backgroundImage.getHeight());
         carX = backgroundImage.getWidth() / 2.0;
         carY = backgroundImage.getHeight() / 6.0;
@@ -136,7 +136,7 @@ public class Simulation implements ActionListener, Runnable {
         double deltaY = VELOCITY * Math.sin(carAngle);
         carX += deltaX;
         carY += deltaY;
-        double DELTA_ANGLE = 0.02;
+        double DELTA_ANGLE = 0.10;
         switch (turn) {
             case LEFT:
                 carAngle -= DELTA_ANGLE;
