@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.michaelsnowden.mlcar.Constants.*;
+
 /**
  * @author michael.snowden
  */
@@ -41,7 +43,7 @@ public class Training implements KeyListener, ActionListener, Runnable {
         frame.setVisible(true);
 
         carImage = ImageIO.read(getClass().getClassLoader().getResource("car.png"));
-        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack.png"));
+        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack3.png"));
         frame.setSize(backgroundImage.getWidth(), backgroundImage.getHeight());
         carX = backgroundImage.getWidth() / 2.0;
         carY = backgroundImage.getHeight() / 6.0;
@@ -132,12 +134,10 @@ public class Training implements KeyListener, ActionListener, Runnable {
     }
 
     public void actionPerformed(ActionEvent e) {
-        double VELOCITY = 1.0;
         double deltaX = VELOCITY * Math.cos(carAngle);
         double deltaY = VELOCITY * Math.sin(carAngle);
         carX += deltaX;
         carY += deltaY;
-        double DELTA_ANGLE = 0.02;
         switch (turn) {
             case LEFT:
                 carAngle -= DELTA_ANGLE;

@@ -14,16 +14,19 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.michaelsnowden.mlcar.Constants.*;
+
 /**
  * @author michael.snowden
  */
 public class Simulation implements ActionListener, Runnable {
+    private final String file = "racetrack3.png";
     private double[] left;
     private double[] right;
     private double[] none;
     double carX;
-    double carY;
 
+    double carY;
     private final JFrame frame;
     private final BufferedImage carImage;
     private final BufferedImage backgroundImage;
@@ -40,7 +43,7 @@ public class Simulation implements ActionListener, Runnable {
         frame.setVisible(true);
 
         carImage = ImageIO.read(getClass().getClassLoader().getResource("car.png"));
-        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack2.png"));
+        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource(file));
         frame.setSize(backgroundImage.getWidth(), backgroundImage.getHeight());
         carX = backgroundImage.getWidth() / 2.0;
         carY = backgroundImage.getHeight() / 6.0;
@@ -98,15 +101,15 @@ public class Simulation implements ActionListener, Runnable {
 
                 g.setColor(Color.GREEN);
                 double thetas[] = {Math.PI / 2, Math.PI / 4, 0, -Math.PI / 4, -Math.PI / 2};
-                for (double theta : thetas) {
-                    double angle = carAngle + theta;
-                    double distance = getDistance(angle, centerX, centerY);
-                    g.drawLine(
-                            (int) centerX,
-                            (int) centerY,
-                            (int) (Math.cos(angle) * distance + centerX),
-                            (int) (Math.sin(angle) * distance + centerY));
-                }
+//                for (double theta : thetas) {
+//                    double angle = carAngle + theta;
+//                    double distance = getDistance(angle, centerX, centerY);
+//                    g.drawLine(
+//                            (int) centerX,
+//                            (int) centerY,
+//                            (int) (Math.cos(angle) * distance + centerX),
+//                            (int) (Math.sin(angle) * distance + centerY));
+//                }
             }
         };
 
@@ -131,12 +134,10 @@ public class Simulation implements ActionListener, Runnable {
     }
 
     public void actionPerformed(ActionEvent e) {
-        double VELOCITY = 1.0;
         double deltaX = VELOCITY * Math.cos(carAngle);
         double deltaY = VELOCITY * Math.sin(carAngle);
         carX += deltaX;
         carY += deltaY;
-        double DELTA_ANGLE = 0.10;
         switch (turn) {
             case LEFT:
                 carAngle -= DELTA_ANGLE;
