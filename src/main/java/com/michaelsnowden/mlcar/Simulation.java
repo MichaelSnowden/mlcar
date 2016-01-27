@@ -20,7 +20,7 @@ import static com.michaelsnowden.mlcar.Constants.*;
  * @author michael.snowden
  */
 public class Simulation implements ActionListener, Runnable {
-    private final String file = "racetrack3.png";
+    private final String file = "racetrack1.png";
     private double[] left;
     private double[] right;
     private double[] none;

@@ -43,7 +43,7 @@ public class Training implements KeyListener, ActionListener, Runnable {
         frame.setVisible(true);
 
         carImage = ImageIO.read(getClass().getClassLoader().getResource("car.png"));
-        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack3.png"));
+        backgroundImage = ImageIO.read(getClass().getClassLoader().getResource("racetrack1.png"));
         frame.setSize(backgroundImage.getWidth(), backgroundImage.getHeight());
         carX = backgroundImage.getWidth() / 2.0;
         carY = backgroundImage.getHeight() / 6.0;
