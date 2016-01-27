@@ -180,7 +180,7 @@ public class Simulation implements ActionListener, Runnable {
     }
 
     public void run() {
-        Timer timer = new Timer(10, this);
+        Timer timer = new Timer(2, this);
         timer.start();
     }
 
